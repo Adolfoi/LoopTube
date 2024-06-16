@@ -5,11 +5,19 @@ function toggleLoop() {
     video.loop = false;
     button.style.backgroundImage = "url('chrome-extension://" + chrome.runtime.id + "/images/loop_off_image.png')"; // Loop Off時の画像
     button.textContent = ''; // テキストを消去
+    video.removeEventListener('ended', restartVideo); // 終了イベントのリスナーを削除
   } else {
     video.loop = true;
     button.style.backgroundImage = "url('chrome-extension://" + chrome.runtime.id + "/images/loop_on_image.png')"; // Loop On時の画像
     button.textContent = ''; // テキストを消去
+    video.addEventListener('ended', restartVideo); // 終了イベントのリスナーを追加
   }
+}
+
+function restartVideo() {
+  let video = document.querySelector('video');
+  video.currentTime = 0;
+  video.play();
 }
 
 function injectButton() {

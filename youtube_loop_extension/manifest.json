@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Loop Button",
+  "version": "1.0",
+  "description": "Add a loop button to YouTube video player to toggle video looping.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["contentScript.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "images/loop_off_image.png",
+        "images/loop_on_image.png"
+      ],
+      "matches": ["*://*.youtube.com/*"]
+    }
+  ]
+}

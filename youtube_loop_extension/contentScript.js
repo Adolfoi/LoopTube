@@ -34,4 +34,20 @@ function injectButton() {
   }
 }
 
-setInterval(injectButton, 1000);
+function observeControls() {
+  let target = document.querySelector('.ytp-right-controls');
+  if (target) {
+    let observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.addedNodes.length > 0 || mutation.removedNodes.length > 0) {
+          injectButton();
+        }
+      });
+    });
+
+    observer.observe(target, { childList: true, subtree: true });
+    injectButton(); // 初回実行
+  }
+}
+
+observeControls();
